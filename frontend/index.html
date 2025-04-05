@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Investment Plot</title>
+</head>
+<body>
+  <h1>Investment Over Years</h1>
+  <button onclick="loadPlot()">Load Plot</button>
+  <p id="status"></p>
+  <img id="plotImage" style="display:none; max-width: 100%; height: auto;" />
+
+  <script>
+    const backendUrl = "http://192.168.0.109:4000";
+
+    function loadPlot() {
+      document.getElementById("status").innerText = "Fetching data...";
+      fetch(`${backendUrl}/api/investment`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("plotImage").src = `data:image/png;base64,${data.image}`;
+          document.getElementById("plotImage").style.display = "block";
+          document.getElementById("status").innerText = "Plot loaded.";
+        })
+        .catch(error => {
+          document.getElementById("status").innerText = "Failed to fetch plot.";
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
