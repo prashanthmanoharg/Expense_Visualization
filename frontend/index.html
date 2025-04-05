@@ -6,12 +6,13 @@
 </head>
 <body>
   <h1>Investment Over Years</h1>
+
   <button onclick="loadPlot()">Load Plot</button>
   <p id="status"></p>
   <img id="plotImage" style="display:none; max-width: 100%; height: auto;" />
 
   <script>
-    const backendUrl = "http://192.168.0.109:4000";
+    const backendUrl = "http://<raspberrypi-ip>:5000";
 
     function loadPlot() {
       document.getElementById("status").innerText = "Fetching data...";
